@@ -285,11 +285,11 @@ def make_chat_download(chat_log: list) -> tuple:
     return href, txt
 # ----------------------- Streamlit App -----------------------
 def app():
-    # Custom CSS for themed colors and animations
+    # Custom CSS for themed colors and animations, with dark mode support
     st.markdown("""
     <style>
     .stApp {
-        background-color: #f0f8ff;
+        /* Use Streamlit's default background */
     }
     .block-container {
         padding: 1rem;
@@ -304,8 +304,24 @@ def app():
         background-color: #45a049;
         transform: scale(1.05);
     }
+    :root[data-theme="light"] .stButton > button {
+        background-color: #4CAF50;
+        color: white;
+    }
+    :root[data-theme="dark"] .stButton > button {
+        background-color: #2E7D32;
+        color: white;
+    }
+    :root[data-theme="dark"] .stButton > button:hover {
+        background-color: #1B5E20;
+        transform: scale(1.05);
+    }
     .expander-header {
         color: #333;
+        font-weight: bold;
+    }
+    :root[data-theme="dark"] .expander-header {
+        color: #ccc;
         font-weight: bold;
     }
     .harmony-meter {
@@ -317,21 +333,45 @@ def app():
         100% { opacity: 1; }
     }
     /* Element-specific colors */
-    [data-element="fiery"] {
+    :root[data-theme="light"] [data-element="fiery"] {
         background-color: #ffcccb;
         border: 1px solid #ff0000;
+        color: #000000;
     }
-    [data-element="airy"] {
+    :root[data-theme="dark"] [data-element="fiery"] {
+        background-color: #5c0a0a;
+        border: 1px solid #ff0000;
+        color: #ffffff;
+    }
+    :root[data-theme="light"] [data-element="airy"] {
         background-color: #e0ffff;
         border: 1px solid #00bfff;
+        color: #000000;
     }
-    [data-element="earthy"] {
+    :root[data-theme="dark"] [data-element="airy"] {
+        background-color: #0a5c5c;
+        border: 1px solid #00bfff;
+        color: #ffffff;
+    }
+    :root[data-theme="light"] [data-element="earthy"] {
         background-color: #f5f5dc;
         border: 1px solid #8b4513;
+        color: #000000;
     }
-    [data-element="watery"] {
+    :root[data-theme="dark"] [data-element="earthy"] {
+        background-color: #5c5c3d;
+        border: 1px solid #8b4513;
+        color: #ffffff;
+    }
+    :root[data-theme="light"] [data-element="watery"] {
         background-color: #add8e6;
         border: 1px solid #0000ff;
+        color: #000000;
+    }
+    :root[data-theme="dark"] [data-element="watery"] {
+        background-color: #0a3d5c;
+        border: 1px solid #0000ff;
+        color: #ffffff;
     }
     </style>
     """, unsafe_allow_html=True)
